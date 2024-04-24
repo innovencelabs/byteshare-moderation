@@ -20,14 +20,14 @@ jobs:
         version: ${{ github.event.release.tag_name }}
 
     - name: Build ClamAV Docker image
-      run: docker build -t innovence/byteshare-clamav:$version .
+      run: docker build -t byteshare/clamav:$version .
 
     - name: Push ClamAV Docker image to Docker Hub
-      run: docker push innovence/byteshare-clamav:$version
+      run: docker push byteshare/clamav:$version
     
     - name: Build Moderation Docker image
-      run: docker build -t innovence/byteshare-moderation:$version .
+      run: docker build -t byteshare/moderation:$version .
 
     - name: Push Moderation Docker image to Docker Hub
-      run: docker push innovence/byteshare-moderation:$version
+      run: docker push byteshare/moderation:$version
 
