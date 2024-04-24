@@ -1,1 +1,1 @@
-# ByteShare-ContentModeration
+# ByteShare Moderation
