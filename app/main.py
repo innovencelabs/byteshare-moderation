@@ -33,7 +33,7 @@ def scan_upload(ch, method, properties, body):
         for file_name in files_in_folder:
             log.info(f"Scanning file: {file_name}")
             file_stream = get_file_stream_from_r2(file_name)
-            passed = scan.scan_file(file_stream)
+            passed = scan.scan_file(file_name, file_stream)
             if not passed:
                 payload = {
                     "safe": False,
