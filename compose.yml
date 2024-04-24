@@ -2,7 +2,7 @@ services:
   freshclam:
     build:
       context: ./clamav
-    image: innovence/clamav:1.0.0
+    image: innovence/byteshare-clamav:1.0.0
     restart: on-failure
     environment:
       MODE: freshclam
@@ -15,7 +15,7 @@ services:
   clamav:
     build:
       context: ./clamav
-    image: innovence/clamav:1.0.0
+    image: innovence/byteshare-clamav:1.0.0
     restart: on-failure
     depends_on:
       - freshclam
@@ -34,7 +34,7 @@ services:
   moderation:
     build:
       context: ./app
-    image: innovence/moderation:1.0.0
+    image: innovence/byteshare-moderation:1.0.0
     restart: unless-stopped
     environment:
       - R2_ACCOUNT_ID
