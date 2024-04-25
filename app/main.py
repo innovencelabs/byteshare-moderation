@@ -21,7 +21,7 @@ def scan_upload(ch, method, properties, body):
     try:
         upload_id = str(body.decode("utf-8"))
         middleware_url = (
-            os.getenv("MIDDLEWARE_BASE_URL") + "/" + "completeScan/" + upload_id
+            os.getenv("MIDDLEWARE_BASE_URL") + "/" + "scan/finalise/" + upload_id
         )
 
         files_in_folder = [
