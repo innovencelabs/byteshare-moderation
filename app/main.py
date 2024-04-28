@@ -47,7 +47,12 @@ def scan_upload(ch, method, properties, body):
         payload = {
             "safe": True,
         }
-        response = requests.post(middleware_url, json=payload)
+
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": os.getenv("MIDDLEWARE_API_KEY"),
+        }
+        response = requests.post(middleware_url, headers=headers, json=payload)
         log.info("Passed for Upload ID: " + upload_id)
 
     except Exception as e:
