@@ -1,7 +1,7 @@
 services:
   freshclam:
     build:
-      context: ./clamav
+      context: ./packages/clamav
     image: byteshare/clamav:1.0.0
     restart: on-failure
     environment:
@@ -14,7 +14,7 @@ services:
 
   clamav:
     build:
-      context: ./clamav
+      context: ./packages/clamav
     image: byteshare/clamav:1.0.0
     restart: on-failure
     depends_on:
