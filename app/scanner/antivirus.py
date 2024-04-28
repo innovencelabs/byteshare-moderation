@@ -1,7 +1,7 @@
-from dotenv import load_dotenv
-import utils.logger as logger
-import pyclamd
 import os
+
+import pyclamd
+from dotenv import load_dotenv
 
 load_dotenv()
 

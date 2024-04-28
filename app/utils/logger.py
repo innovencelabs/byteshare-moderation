@@ -1,6 +1,6 @@
 import logging
-from logging.handlers import RotatingFileHandler
 import sys
+from logging.handlers import RotatingFileHandler
 
 
 class ColoredFormatter(logging.Formatter):
@@ -31,9 +31,7 @@ def get_logger():
     ch.setFormatter(formatter)
     logger.addHandler(ch)
 
-    fh = RotatingFileHandler(
-        "logs/app.log", maxBytes=10 * 1024 * 1024, backupCount=50
-    )
+    fh = RotatingFileHandler("logs/app.log", maxBytes=10 * 1024 * 1024, backupCount=50)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 

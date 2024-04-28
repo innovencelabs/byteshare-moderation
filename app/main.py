@@ -1,11 +1,11 @@
-import pyclamd
-import pika
 import os
+
 import boto3
+import pika
 import requests
-from dotenv import load_dotenv
 import scanner.scan as scan
 import utils.logger as logger
+from dotenv import load_dotenv
 
 load_dotenv()
 
