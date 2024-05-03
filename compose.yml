@@ -2,7 +2,7 @@ services:
   freshclam:
     build:
       context: ./packages/clamav
-    image: byteshare/clamav:0.1.0
+    image: byteshare/clamav:${VERSION}
     restart: on-failure
     environment:
       MODE: freshclam
@@ -15,7 +15,7 @@ services:
   clamav:
     build:
       context: ./packages/clamav
-    image: byteshare/clamav:0.1.0
+    image: byteshare/clamav:${VERSION}
     restart: on-failure
     depends_on:
       - freshclam
@@ -34,7 +34,7 @@ services:
   moderation:
     build:
       context: ./app
-    image: byteshare/moderation:0.1.0
+    image: byteshare/moderation:${VERSION}
     restart: unless-stopped
     environment:
       - R2_ACCOUNT_ID

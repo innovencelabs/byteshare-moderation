@@ -34,14 +34,18 @@ def scan_upload(ch, method, properties, body):
             log.info(f"Scanning file: {file_name}")
             file_stream = get_file_stream_from_r2(file_name)
             passed = scan.scan_file(file_name, file_stream)
+
             if not passed:
                 payload = {
                     "safe": False,
                 }
-                response = requests.post(middleware_url, json=payload)
+                headers = {
+                    "Content-Type": "application/json",
+                    "x-api-key": os.getenv("MIDDLEWARE_API_KEY"),
+                }
+                response = requests.post(middleware_url, headers=headers, json=payload)
 
-                log.info("Failed for Upload ID: " + upload_id)
-                ch.basic_ack(delivery_tag=method.delivery_tag)
+                log.info("NOT passed for Upload ID: " + upload_id)
                 return
 
         payload = {
