@@ -5,15 +5,16 @@ import scanner.nsfw_image as nsfw_image
 
 
 def scan_file(file_name, file_stream):
-    result = True
     if _is_image(file_name, file_stream):
         nsfw_image_passed = nsfw_image.scan_image(file_stream)
-        result = result and nsfw_image_passed
+        if not nsfw_image_passed:
+            return False
 
     antivirus_passed = antivirus.scan_virus(file_stream)
-    result = result and antivirus_passed
+    if not antivirus_passed:
+        return False
 
-    return result
+    return True
 
 
 def _is_image(filename, file_stream):
