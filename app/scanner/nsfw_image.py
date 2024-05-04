@@ -1,7 +1,11 @@
+import os
 from io import BytesIO
 
+from dotenv import load_dotenv
 from PIL import Image
 from transformers import pipeline
+
+load_dotenv()
 
 classify = pipeline("image-classification", model="Falconsai/nsfw_image_detection")
 
@@ -15,7 +19,7 @@ def scan_image(file_stream):
         (item["score"] for item in result if item["label"] == "nsfw"), None
     )
 
-    if nsfw_score > 0.9:
+    if nsfw_score > int(os.getenv("NSFW_IMAGE_THRESHOLD")):
         return False
     else:
         return True
