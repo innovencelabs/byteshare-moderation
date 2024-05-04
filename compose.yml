@@ -46,6 +46,7 @@ services:
       - MIDDLEWARE_BASE_URL
       - MIDDLEWARE_API_KEY
       - CLAMAV_HOST
+      - NSFW_IMAGE_THRESHOLD
     depends_on:
       - clamav
     volumes:
