@@ -1,3 +1,4 @@
+import base64
 import os
 
 import boto3
@@ -30,6 +31,11 @@ def scan_upload(ch, method, properties, body):
                 "Contents", []
             )
         ]
+
+        credentials = f"{os.getenv("SCAN_USER")}:{os.getenv("SCAN_PASS")}"
+        encoded_credentials = base64.b64encode(credentials.encode("utf-8")).decode("ascii")
+        authorization_header_value = f"Basic {encoded_credentials}"
+
         for file_name in files_in_folder:
             log.info(f"Scanning file: {file_name}")
             file_stream = get_file_stream_from_r2(file_name)
@@ -42,6 +48,7 @@ def scan_upload(ch, method, properties, body):
                 headers = {
                     "Content-Type": "application/json",
                     "x-api-key": os.getenv("MIDDLEWARE_API_KEY"),
+                    "Authorization": authorization_header_value
                 }
                 response = requests.post(middleware_url, headers=headers, json=payload)
 
@@ -55,6 +62,7 @@ def scan_upload(ch, method, properties, body):
         headers = {
             "Content-Type": "application/json",
             "x-api-key": os.getenv("MIDDLEWARE_API_KEY"),
+            "Authorization": authorization_header_value
         }
         response = requests.post(middleware_url, headers=headers, json=payload)
         log.info("Passed for Upload ID: " + upload_id)
